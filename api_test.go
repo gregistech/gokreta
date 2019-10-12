@@ -10,11 +10,8 @@ import (
 
 func TestGetAllInstitutes(t *testing.T) {
 	institutes, err := GetAllInstitutes()
-	if err != nil {
+	if err != nil || institutes == nil {
 		fmt.Println(err)
-		t.Errorf("An error happened while trying to get institutes!")
-	}
-	if institutes == nil {
 		t.Errorf("An error happened while trying to get institutes!")
 	}
 }
@@ -23,15 +20,7 @@ func TestGetInstituteDetails(t *testing.T) {
 	institutes, err := GetAllInstitutes()
 	id := institutes[0].InstituteId
 	institute, err := GetInstituteDetails(id)
-	if err != nil {
-		fmt.Println(err)
-		t.Errorf("An error happened while trying to get institute " + strconv.Itoa(id))
-	}
-	if institute.Name == "" {
-		fmt.Println(err)
-		t.Errorf("An error happened while trying to get institute " + strconv.Itoa(id))
-	}
-	if institutes == nil {
+	if err != nil || institute.Name == "" || institutes == nil {
 		fmt.Println(err)
 		t.Errorf("An error happened while trying to get institute " + strconv.Itoa(id))
 	}
@@ -39,11 +28,7 @@ func TestGetInstituteDetails(t *testing.T) {
 
 func TestGetAPIUrls(t *testing.T) {
 	urls, err := GetAPIUrls()
-	if err != nil {
-		fmt.Println(err)
-		t.Errorf("An error happened while trying to get API URLs!")
-	}
-	if urls == nil {
+	if err != nil || urls == nil {
 		fmt.Println(err)
 		t.Errorf("An error happened while trying to get API URLs!")
 	}
