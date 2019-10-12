@@ -2,7 +2,6 @@ package gokreta
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"net/http"
 	"strconv"
@@ -35,24 +34,16 @@ type AuthDetails struct {
 
 func GetAllInstitutes() ([]Institute, error) {
 	var institutes []Institute
-	req, err := http.NewRequest("GET", "https://kretaglobalmobileapi.ekreta.hu/api/v1/Institute", nil)
-	if err != nil {
-		return institutes, err
-	}
 	headers := http.Header{
 		"apiKey": []string{API_KEY},
 		"Accept": []string{"text/plain", "text/html", "application/json"},
 	}
-	req.Header = headers
-	resp, err := http.DefaultClient.Do(req)
+	body, err := MakeRequest("GET", "https://kretaglobalmobileapi.ekreta.hu/api/v1/Institute", headers, nil)
 	if err != nil {
 		return institutes, err
 	}
-	defer resp.Body.Close()
-	jsonResp, err := ioutil.ReadAll(resp.Body)
-	err = json.Unmarshal([]byte(jsonResp), &institutes)
+	err = json.Unmarshal(body, &institutes)
 	if err != nil {
-		fmt.Println(resp.Status)
 		return institutes, err
 	}
 	return institutes, err
@@ -60,32 +51,26 @@ func GetAllInstitutes() ([]Institute, error) {
 
 func GetInstituteDetails(id int) (Institute, error) {
 	var institute Institute
-	req, err := http.NewRequest("GET",
+	headers := http.Header{
+		"apiKey": []string{API_KEY},
+		"Accept": []string{"text/plain", "text/html", "application/json"},
+	}
+	body, err := MakeRequest("GET",
 		"https://kretaglobalmobileapi.ekreta.hu/api/v1/Institute/"+strconv.Itoa(id),
+		headers,
 		nil,
 	)
 	if err != nil {
 		return institute, err
 	}
-	headers := http.Header{
-		"apiKey": []string{API_KEY},
-		"Accept": []string{"text/plain", "text/html", "application/json"},
-	}
-	req.Header = headers
-	resp, err := http.DefaultClient.Do(req)
+	err = json.Unmarshal(body, &institute)
 	if err != nil {
-		return institute, err
-	}
-	defer resp.Body.Close()
-	jsonResp, err := ioutil.ReadAll(resp.Body)
-	err = json.Unmarshal([]byte(jsonResp), &institute)
-	if err != nil {
-		fmt.Println(resp.Status)
 		return institute, err
 	}
 	return institute, err
 }
 
+// TODO: CONTINUE REFACTOR
 func GetAPIUrls() (map[string]string, error) {
 	urls := make(map[string]string)
 	req, err := http.NewRequest("GET",
