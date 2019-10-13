@@ -1,13 +1,13 @@
 # gokreta
 
-##Nyelvek/Languages:
+## Nyelvek/Languages:
 [Magyar]("https://github.com/thegergo02/gokreta/README.md")
 [English]("https://github.com/thegergo02/gokreta/README.en_US.md")
 
-##A csomag célja
+## A csomag célja
 Egy egszerű absztrakció létrehozása a Kréta API-hoz.
 
-##Közremüködők
+## Közremüködők
 Név | Közremüködés
 --- | ---
 [thegergo02]("https://github.com/thegergo02") | Maintainer
