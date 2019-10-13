@@ -3,10 +3,11 @@ package gokreta
 import (
 	"io/ioutil"
 	"net/http"
+	"strings"
 )
 
-func MakeRequest(requestType string, requestUrl string, headers http.Header, body []byte) ([]byte, error) {
-	req, err := http.NewRequest(requestType, requestUrl, nil)
+func MakeRequest(requestType string, requestUrl string, headers http.Header, body string) ([]byte, error) {
+	req, err := http.NewRequest(requestType, requestUrl, strings.NewReader(body))
 	if err != nil {
 		return nil, err
 	}

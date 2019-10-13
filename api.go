@@ -2,10 +2,8 @@ package gokreta
 
 import (
 	"encoding/json"
-	"io/ioutil"
 	"net/http"
 	"strconv"
-	"strings"
 )
 
 const API_KEY = "7856d350-1fda-45f5-822d-e1a2f3f1acf0"
@@ -38,7 +36,7 @@ func GetAllInstitutes() ([]Institute, error) {
 		"apiKey": []string{API_KEY},
 		"Accept": []string{"text/plain", "text/html", "application/json"},
 	}
-	body, err := MakeRequest("GET", "https://kretaglobalmobileapi.ekreta.hu/api/v1/Institute", headers, nil)
+	body, err := MakeRequest("GET", "https://kretaglobalmobileapi.ekreta.hu/api/v1/Institute", headers, "")
 	if err != nil {
 		return institutes, err
 	}
@@ -58,7 +56,7 @@ func GetInstituteDetails(id int) (Institute, error) {
 	body, err := MakeRequest("GET",
 		"https://kretaglobalmobileapi.ekreta.hu/api/v1/Institute/"+strconv.Itoa(id),
 		headers,
-		nil,
+		"",
 	)
 	if err != nil {
 		return institute, err
@@ -70,26 +68,17 @@ func GetInstituteDetails(id int) (Institute, error) {
 	return institute, err
 }
 
-// TODO: CONTINUE REFACTOR
 func GetAPIUrls() (map[string]string, error) {
 	urls := make(map[string]string)
-	req, err := http.NewRequest("GET",
+	body, err := MakeRequest("GET",
 		"http://kretamobile.blob.core.windows.net/configuration/ConfigurationDescriptor.json",
 		nil,
+		"",
 	)
 	if err != nil {
 		return urls, err
 	}
-	resp, err := http.DefaultClient.Do(req)
-	if err != nil {
-		return urls, err
-	}
-	defer resp.Body.Close()
-	jsonResp, err := ioutil.ReadAll(resp.Body)
-	err = json.Unmarshal([]byte(jsonResp), &urls)
-	if err != nil {
-		return urls, err
-	}
+	err = json.Unmarshal(body, &urls)
 	return urls, err
 }
 
@@ -98,42 +87,28 @@ func GetAuthDetailsByCredetinals(instituteCode string,
 	password string,
 ) (AuthDetails, error) {
 	var authDetails AuthDetails
-	body := strings.NewReader("institute_code=" + instituteCode + "&userName=" + userName + "&password=" + password + "&grant_type=password&client_id=" + CLIENT_ID)
-	req, err := http.NewRequest("POST", "https://"+instituteCode+".e-kreta.hu/idp/api/v1/Token", body)
+	body := "institute_code=" + instituteCode + "&userName=" + userName + "&password=" + password + "&grant_type=password&client_id=" + CLIENT_ID
+	headers := http.Header{
+		"Content-type": []string{"application/x-www-form-urlencoded; charset=utf-8"},
+	}
+	respBody, err := MakeRequest("POST", "https://"+instituteCode+".e-kreta.hu/idp/api/v1/Token", headers, body)
 	if err != nil {
 		return authDetails, err
 	}
-	req.Header.Set("Content-Type", "application/x-www-form-urlencoded; charset=utf-8")
-	resp, err := http.DefaultClient.Do(req)
-	if err != nil {
-		return authDetails, err
-	}
-	defer resp.Body.Close()
-	jsonResp, err := ioutil.ReadAll(resp.Body)
-	err = json.Unmarshal(jsonResp, &authDetails)
-	if err != nil {
-		return authDetails, err
-	}
+	err = json.Unmarshal(respBody, &authDetails)
 	return authDetails, err
 }
 
 func RefreshAuthDetails(instituteCode string, refreshToken string) (AuthDetails, error) {
 	var authDetails AuthDetails
-	body := strings.NewReader("institute_code=" + instituteCode + "&refresh_token=" + refreshToken + "&grant_type=refresh_token&client_id=" + CLIENT_ID)
-	req, err := http.NewRequest("POST", "https://"+instituteCode+".e-kreta.hu/idp/api/v1/Token", body)
+	body := "institute_code=" + instituteCode + "&refresh_token=" + refreshToken + "&grant_type=refresh_token&client_id=" + CLIENT_ID
+	headers := http.Header{
+		"Content-type": []string{"application/x-www-form-urlencoded; charset=utf-8"},
+	}
+	respBody, err := MakeRequest("POST", "https://"+instituteCode+".e-kreta.hu/idp/api/v1/Token", headers, body)
 	if err != nil {
 		return authDetails, err
 	}
-	req.Header.Set("Content-Type", "application/x-www-form-urlencoded; charset=utf-8")
-	resp, err := http.DefaultClient.Do(req)
-	if err != nil {
-		return authDetails, err
-	}
-	defer resp.Body.Close()
-	jsonResp, err := ioutil.ReadAll(resp.Body)
-	err = json.Unmarshal(jsonResp, &authDetails)
-	if err != nil {
-		return authDetails, err
-	}
+	err = json.Unmarshal(respBody, &authDetails)
 	return authDetails, err
 }
