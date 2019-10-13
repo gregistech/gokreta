@@ -1,28 +1,14 @@
 package gokreta
 
 import (
-	"bufio"
 	"fmt"
-	"os"
 	"testing"
 )
 
 func TestGetAuthDetailsByCredetinals(t *testing.T) {
-	file, err := os.Open("credetinals.txt")
+	instituteCode, userName, password, err := getCredetinalsFromFile()
 	if err != nil {
-		fmt.Println("Skipping GetAuthDetailsByCredetinals because credetinals.txt doesn't exist!")
-		return
-	}
-	reader := bufio.NewReader(file)
-	instituteCode, isPrefix, err := reader.ReadLine()
-	userName, isPrefix, err := reader.ReadLine()
-	password, isPrefix, err := reader.ReadLine()
-	if isPrefix {
-		fmt.Println("Yeaa...")
-	}
-	defer file.Close()
-	if err != nil {
-		fmt.Println("Skipping GetAuthDetailsByCredetinals because credetinals.txt doesn't exist!")
+		fmt.Println("An error happened while reading credetinals.txt skipping TestGetAuthDetailsByCredetinals!")
 		return
 	}
 	authDetails, err := GetAuthDetailsByCredetinals(string(instituteCode), string(userName), string(password))
@@ -37,21 +23,9 @@ func TestGetAuthDetailsByCredetinals(t *testing.T) {
 }
 
 func TestRefreshAuthDetails(t *testing.T) {
-	file, err := os.Open("credetinals.txt")
+	instituteCode, userName, password, err := getCredetinalsFromFile()
 	if err != nil {
-		fmt.Println("Skipping RefreshAuthDetails because credetinals.txt doesn't exist!")
-		return
-	}
-	reader := bufio.NewReader(file)
-	instituteCode, isPrefix, err := reader.ReadLine()
-	userName, isPrefix, err := reader.ReadLine()
-	password, isPrefix, err := reader.ReadLine()
-	if isPrefix {
-		fmt.Println("Yeaa...")
-	}
-	defer file.Close()
-	if err != nil {
-		fmt.Println("Skipping RefreshAuthDetails because credetinals.txt doesn't exist!")
+		fmt.Println("An error happened while reading credetinals.txt skipping TestRefreshAuthDetails!")
 		return
 	}
 	authDetails, err := GetAuthDetailsByCredetinals(string(instituteCode), string(userName), string(password))
