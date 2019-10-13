@@ -5,7 +5,7 @@
 * [English](https://github.com/thegergo02/gokreta/README.en_US.md)
 
 ## A csomag célja
-Egy egszerű absztrakció létrehozása a Kréta API-hoz.
+Egy egyszerű absztrakció létrehozása a Kréta API-hoz.
 
 ## Közremüködők
 Név | Közremüködés
