@@ -10,10 +10,15 @@ func TestGetAllExamsByDate(t *testing.T) {
 	authDetails, err := GetAuthDetailsByCredetinals(instituteCode, userName, password)
 	accessToken := authDetails.AccessToken
 	exams, err := GetAllExamsByDate(instituteCode, accessToken, "null", "null")
-	if err != nil {
+	if err != nil || exams == nil {
 		fmt.Println(err)
 		t.Errorf("An error happened while trying to get all the exams by date!")
+		return
 	}
+	fmt.Println("TestGetAllExamsByDate passed!")
+	fmt.Println("Result: ")
+	fmt.Println(exams)
+	fmt.Println()
 }
 
 func TestGetAllExams(t *testing.T) {
@@ -21,8 +26,13 @@ func TestGetAllExams(t *testing.T) {
 	authDetails, err := GetAuthDetailsByCredetinals(instituteCode, userName, password)
 	accessToken := authDetails.AccessToken
 	exams, err := GetAllExams(instituteCode, accessToken)
-	if err != nil {
+	if err != nil || exams == nil {
 		fmt.Println(err)
 		t.Errorf("An error happened while trying to get all the exams by date!")
+		return
 	}
+	fmt.Println("TestGetAllExams passed!")
+	fmt.Println("Result: ")
+	fmt.Println(exams)
+	fmt.Println()
 }

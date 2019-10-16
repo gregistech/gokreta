@@ -11,7 +11,12 @@ func TestGetAllInstitutes(t *testing.T) {
 	if err != nil || institutes == nil {
 		fmt.Println(err)
 		t.Errorf("An error happened while trying to get institutes!")
+		return
 	}
+	fmt.Println("TestGetAllInstitutes passed!")
+	fmt.Println("Result: ")
+	fmt.Println(institutes[2])
+	fmt.Println()
 }
 
 func TestGetInstituteDetails(t *testing.T) {
@@ -21,5 +26,10 @@ func TestGetInstituteDetails(t *testing.T) {
 	if err != nil || institute.Name == "" || institutes == nil {
 		fmt.Println(err)
 		t.Errorf("An error happened while trying to get institute " + strconv.Itoa(id))
+		return
 	}
+	fmt.Println("TestGetInstituteDetails passed!")
+	fmt.Println("Result: ")
+	fmt.Println(institute)
+	fmt.Println()
 }

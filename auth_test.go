@@ -15,11 +15,17 @@ func TestGetAuthDetailsByCredetinals(t *testing.T) {
 	if err != nil {
 		fmt.Println(err)
 		t.Errorf("An error happened while trying to get login details!")
+		return
 	}
 	if authDetails.AccessToken == "" {
 		fmt.Println(authDetails)
 		t.Errorf("An error happened while trying to get login details!")
+		return
 	}
+	fmt.Println("TestGetAuthDetailsByCredetinals passed!")
+	fmt.Println("Result: ")
+	fmt.Println(authDetails)
+	fmt.Println()
 }
 
 func TestRefreshAuthDetails(t *testing.T) {
@@ -33,9 +39,15 @@ func TestRefreshAuthDetails(t *testing.T) {
 	if err != nil {
 		fmt.Println(err)
 		t.Errorf("An error happened while trying to refresh login details!")
+		return
 	}
 	if refreshedDetails.AccessToken == "" {
 		fmt.Println(refreshedDetails)
 		t.Errorf("An error happened while trying to refresh login details!")
+		return
 	}
+	fmt.Println("TestRefreshAuthDetails passed!")
+	fmt.Println("Result: ")
+	fmt.Println(refreshedDetails)
+	fmt.Println()
 }
