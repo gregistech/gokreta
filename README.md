@@ -7,8 +7,8 @@
 ## A csomag célja
 Egy egyszerű absztrakció létrehozása a Kréta API-hoz.
 
-##Példa
-```
+## Példa
+```golang
 package main
 
 import (
