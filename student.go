@@ -2,7 +2,6 @@ package gokreta
 
 import (
 	"encoding/json"
-	"net/http"
 )
 
 type SubjectAverage struct {
@@ -41,8 +40,8 @@ func GetStudentDetailsByDate(instituteCode string,
 	toDate string,
 ) (Student, error) {
 	var student Student
-	headers := http.Header{
-		"Authorization": []string{"Bearer " + accessToken},
+	headers := map[string]string{
+		"Authorization": "Bearer " + accessToken,
 	}
 	body, err := MakeRequest("GET",
 		"https://"+instituteCode+".e-kreta.hu/mapi/api/v1/Student?fromDate="+fromDate+"&toDate="+toDate,
@@ -58,8 +57,8 @@ func GetStudentDetailsByDate(instituteCode string,
 
 func GetStudentDetails(instituteCode string, accessToken string) (Student, error) {
 	var student Student
-	headers := http.Header{
-		"Authorization": []string{"Bearer " + accessToken},
+	headers := map[string]string{
+		"Authorization": "Bearer " + accessToken,
 	}
 	body, err := MakeRequest("GET",
 		"https://"+instituteCode+".e-kreta.hu/mapi/api/v1/Student",

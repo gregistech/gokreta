@@ -2,7 +2,6 @@ package gokreta
 
 import (
 	"encoding/json"
-	"net/http"
 )
 
 type AuthDetails struct {
@@ -18,8 +17,8 @@ func GetAuthDetailsByCredetinals(instituteCode string,
 ) (AuthDetails, error) {
 	var authDetails AuthDetails
 	body := "institute_code=" + instituteCode + "&userName=" + userName + "&password=" + password + "&grant_type=password&client_id=" + CLIENT_ID
-	headers := http.Header{
-		"Content-type": []string{"application/x-www-form-urlencoded; charset=utf-8"},
+	headers := map[string]string{
+		"Content-type": "application/x-www-form-urlencoded; charset=utf-8",
 	}
 	respBody, err := MakeRequest("POST", "https://"+instituteCode+".e-kreta.hu/idp/api/v1/Token", headers, body)
 	if err != nil {
@@ -32,8 +31,8 @@ func GetAuthDetailsByCredetinals(instituteCode string,
 func RefreshAuthDetails(instituteCode string, refreshToken string) (AuthDetails, error) {
 	var authDetails AuthDetails
 	body := "institute_code=" + instituteCode + "&refresh_token=" + refreshToken + "&grant_type=refresh_token&client_id=" + CLIENT_ID
-	headers := http.Header{
-		"Content-type": []string{"application/x-www-form-urlencoded; charset=utf-8"},
+	headers := map[string]string{
+		"Content-type": "application/x-www-form-urlencoded; charset=utf-8",
 	}
 	respBody, err := MakeRequest("POST", "https://"+instituteCode+".e-kreta.hu/idp/api/v1/Token", headers, body)
 	if err != nil {

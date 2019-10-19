@@ -2,7 +2,6 @@ package gokreta
 
 import (
 	"encoding/json"
-	"net/http"
 )
 
 type Lesson struct {
@@ -31,8 +30,8 @@ type Lesson struct {
 
 func GetTimetableByDate(instituteCode string, accessToken string, fromDate string, toDate string) ([]Lesson, error) {
 	var lessons []Lesson
-	headers := http.Header{
-		"Authorization": []string{"Bearer " + accessToken},
+	headers := map[string]string{
+		"Authorization": "Bearer " + accessToken,
 	}
 	body, err := MakeRequest("GET",
 		"https://"+instituteCode+".e-kreta.hu/mapi/api/v1/Lesson?fromDate="+fromDate+"&toDate="+toDate,
@@ -48,8 +47,8 @@ func GetTimetableByDate(instituteCode string, accessToken string, fromDate strin
 
 func GetTimetable(instituteCode string, accessToken string) ([]Lesson, error) {
 	var lessons []Lesson
-	headers := http.Header{
-		"Authorization": []string{"Bearer " + accessToken},
+	headers := map[string]string{
+		"Authorization": "Bearer " + accessToken,
 	}
 	body, err := MakeRequest("GET",
 		"https://"+instituteCode+".e-kreta.hu/mapi/api/v1/Lesson",

@@ -2,7 +2,6 @@ package gokreta
 
 import (
 	"encoding/json"
-	"net/http"
 )
 
 type Exam struct {
@@ -18,8 +17,8 @@ type Exam struct {
 
 func GetAllExams(instituteCode string, accessToken string) ([]Exam, error) {
 	var exams []Exam
-	headers := http.Header{
-		"Authorization": []string{"Bearer " + accessToken},
+	headers := map[string]string{
+		"Authorization": "Bearer " + accessToken,
 	}
 	body, err := MakeRequest("GET",
 		"https://"+instituteCode+".e-kreta.hu/mapi/api/v1/BejelentettSzamonkeres",
@@ -35,8 +34,8 @@ func GetAllExams(instituteCode string, accessToken string) ([]Exam, error) {
 
 func GetAllExamsByDate(instituteCode string, accessToken string, fromDate string, toDate string) ([]Exam, error) {
 	var exams []Exam
-	headers := http.Header{
-		"Authorization": []string{"Bearer " + accessToken},
+	headers := map[string]string{
+		"Authorization": "Bearer " + accessToken,
 	}
 	body, err := MakeRequest("GET",
 		"https://"+instituteCode+".e-kreta.hu/mapi/api/v1/BejelentettSzamonkeres?DatumTol="+fromDate+"&DatumIg="+toDate,

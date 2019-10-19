@@ -22,11 +22,11 @@ type Institute struct {
 
 func GetAllInstitutes() ([]Institute, error) {
 	var institutes []Institute
-	headers := http.Header{
-		"apiKey": []string{API_KEY},
-		"Accept": []string{"text/plain", "text/html", "application/json"},
-	}
-	body, err := MakeRequest("GET", "https://kretaglobalmobileapi.ekreta.hu/api/v1/Institute", headers, "")
+	body, err := VerboseMakeRequest("GET",
+		"https://kretaglobalmobileapi.ekreta.hu/api/v1/Institute",
+		http.Header{"apiKey": []string{API_KEY}},
+		"",
+	)
 	if err != nil {
 		return institutes, err
 	}
@@ -39,13 +39,9 @@ func GetAllInstitutes() ([]Institute, error) {
 
 func GetInstituteDetails(id int) (Institute, error) {
 	var institute Institute
-	headers := http.Header{
-		"apiKey": []string{API_KEY},
-		"Accept": []string{"text/plain", "text/html", "application/json"},
-	}
-	body, err := MakeRequest("GET",
+	body, err := VerboseMakeRequest("GET",
 		"https://kretaglobalmobileapi.ekreta.hu/api/v1/Institute/"+strconv.Itoa(id),
-		headers,
+		http.Header{"apiKey": []string{API_KEY}},
 		"",
 	)
 	if err != nil {

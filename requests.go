@@ -6,7 +6,29 @@ import (
 	"strings"
 )
 
-func MakeRequest(requestType string, requestUrl string, headers http.Header, body string) ([]byte, error) {
+func MakeRequest(requestType string, requestUrl string, headers map[string]string, body string) ([]byte, error) {
+	req, err := http.NewRequest(requestType, requestUrl, strings.NewReader(body))
+	if err != nil {
+		return nil, err
+	}
+	useragent, err := GetUserAgent()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Set("User-Agent", useragent)
+	for k, v := range headers {
+		req.Header.Set(k, v)
+	}
+	resp, err := http.DefaultClient.Do(req)
+	defer resp.Body.Close()
+	return ioutil.ReadAll(resp.Body)
+}
+
+func VerboseMakeRequest(requestType string,
+	requestUrl string,
+	headers http.Header,
+	body string,
+) ([]byte, error) {
 	req, err := http.NewRequest(requestType, requestUrl, strings.NewReader(body))
 	if err != nil {
 		return nil, err
