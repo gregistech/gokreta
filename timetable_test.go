@@ -8,6 +8,11 @@ import (
 func TestGetTimetableByDate(t *testing.T) {
 	instituteCode, userName, password, err := getCredetinalsFromFile()
 	authDetails, err := GetAuthDetailsByCredetinals(instituteCode, userName, password)
+	if err != nil {
+		fmt.Println(err)
+		t.Errorf("An error happened while trying to get the timetable by date!")
+		return
+	}
 	accessToken := authDetails.AccessToken
 	lessons, err := GetTimetableByDate(instituteCode, accessToken, "null", "null")
 	if err != nil {
@@ -24,6 +29,11 @@ func TestGetTimetableByDate(t *testing.T) {
 func TestGetTimetable(t *testing.T) {
 	instituteCode, userName, password, err := getCredetinalsFromFile()
 	authDetails, err := GetAuthDetailsByCredetinals(instituteCode, userName, password)
+	if err != nil {
+		fmt.Println(err)
+		t.Errorf("An error happened while trying to get the timetable!")
+		return
+	}
 	accessToken := authDetails.AccessToken
 	lessons, err := GetTimetable(instituteCode, accessToken)
 	if err != nil {

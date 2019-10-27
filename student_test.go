@@ -8,6 +8,11 @@ import (
 func TestGetStudentDetailsByDate(t *testing.T) {
 	instituteCode, userName, password, err := getCredetinalsFromFile()
 	authDetails, err := GetAuthDetailsByCredetinals(instituteCode, userName, password)
+	if err != nil {
+		fmt.Println(err)
+		t.Errorf("An error happened while trying to get student details by date!")
+		return
+	}
 	accessToken := authDetails.AccessToken
 	student, err := GetStudentDetailsByDate(instituteCode, accessToken, "null", "null")
 	if err != nil {
@@ -32,6 +37,11 @@ func TestGetStudentDetailsByDate(t *testing.T) {
 func TestGetStudentDetails(t *testing.T) {
 	instituteCode, userName, password, err := getCredetinalsFromFile()
 	authDetails, err := GetAuthDetailsByCredetinals(instituteCode, userName, password)
+	if err != nil {
+		fmt.Println(err)
+		t.Errorf("An error happened while trying to get student details!")
+		return
+	}
 	accessToken := authDetails.AccessToken
 	student, err := GetStudentDetails(instituteCode, accessToken)
 	if err != nil {

@@ -28,7 +28,7 @@ func GetAllExams(instituteCode string, accessToken string) ([]Exam, error) {
 	if err != nil {
 		return exams, err
 	}
-	err = json.Unmarshal(body, &exams)
+	json.Unmarshal(body, &exams)
 	return exams, err
 }
 
@@ -45,6 +45,6 @@ func GetAllExamsByDate(instituteCode string, accessToken string, fromDate string
 	if err != nil {
 		return exams, err
 	}
-	err = json.Unmarshal(body, &exams)
+	json.Unmarshal(body, &exams)
 	return exams, err
 }

@@ -21,7 +21,9 @@ func MakeRequest(requestType string, requestUrl string, headers map[string]strin
 	}
 	resp, err := http.DefaultClient.Do(req)
 	defer resp.Body.Close()
-	return ioutil.ReadAll(resp.Body)
+	respBody, err := ioutil.ReadAll(resp.Body)
+	err = CheckResponseErrors(respBody)
+	return respBody, err
 }
 
 func VerboseMakeRequest(requestType string,
