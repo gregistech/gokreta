@@ -13,7 +13,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/thegergo02/gokreta"
+	"github.com/thegergo02/goenaplo"
 )
 
 func main() {
