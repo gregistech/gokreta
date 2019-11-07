@@ -1,4 +1,4 @@
-# gokreta
+# goenaplo
 
 ## Nyelvek/Languages
 * [Magyar](https://github.com/thegergo02/gokreta/README.md)
