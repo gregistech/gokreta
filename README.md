@@ -1,4 +1,4 @@
-# goenaplo
+# gokreta
 
 ## Nyelvek/Languages
 * [Magyar](https://github.com/thegergo02/gokreta/README.md)
@@ -13,7 +13,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/thegergo02/goenaplo"
+	"github.com/thegergo02/gokreta"
 )
 
 func main() {
