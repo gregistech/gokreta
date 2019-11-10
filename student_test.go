@@ -26,9 +26,15 @@ func TestGetStudentDetailsByDate(t *testing.T) {
 	fmt.Println(student.AddressDataList)
 	fmt.Println(student.InstituteCode)
 	fmt.Println(student.InstituteName)
-	fmt.Println(student.Evaluations[0])
-	fmt.Println(student.SubjectAverages[0])
-	fmt.Println(student.Absences[0])
+	if len(student.Evaluations) > 0 {
+		fmt.Println(student.Evaluations[0])
+	}
+	if len(student.SubjectAverages) > 0 {
+		fmt.Println(student.SubjectAverages[0])
+	}
+	if len(student.Absences) > 0 {
+		fmt.Println(student.Absences[0])
+	}
 	fmt.Println(student.FormTeacher)
 	fmt.Println(student.Tutelaries)
 	fmt.Println()
@@ -55,9 +61,15 @@ func TestGetStudentDetails(t *testing.T) {
 	fmt.Println(student.AddressDataList)
 	fmt.Println(student.InstituteCode)
 	fmt.Println(student.InstituteName)
-	fmt.Println(student.Evaluations[0])
-	fmt.Println(student.SubjectAverages[0])
-	fmt.Println(student.Absences[0])
+	if len(student.Evaluations) > 0 {
+		fmt.Println(student.Evaluations[0])
+	}
+	if len(student.SubjectAverages) > 0 {
+		fmt.Println(student.SubjectAverages[0])
+	}
+	if len(student.Absences) > 0 {
+		fmt.Println(student.Absences[0])
+	}
 	fmt.Println(student.FormTeacher)
 	fmt.Println(student.Tutelaries)
 	fmt.Println()
