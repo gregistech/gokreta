@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2019 thegergo02
+Copyright (c) 2019 Vári Gergő
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
