@@ -5,10 +5,11 @@ import (
 )
 
 type AuthDetails struct {
-	AccessToken  string `json:"access_token"`
-	TokenType    string `json:"token_type"`
-	ExpiresIn    int    `json:"expires_in"`
-	RefreshToken string `json:"refresh_token"`
+	InstituteCode string
+	AccessToken   string `json:"access_token"`
+	TokenType     string `json:"token_type"`
+	ExpiresIn     int    `json:"expires_in"`
+	RefreshToken  string `json:"refresh_token"`
 }
 
 func GetAuthDetailsByCredetinals(instituteCode string,
@@ -25,6 +26,7 @@ func GetAuthDetailsByCredetinals(instituteCode string,
 		return authDetails, err
 	}
 	err = json.Unmarshal(respBody, &authDetails)
+	authDetails.InstituteCode = instituteCode
 	return authDetails, err
 }
 
@@ -39,5 +41,6 @@ func RefreshAuthDetails(instituteCode string, refreshToken string) (AuthDetails,
 		return authDetails, err
 	}
 	err = json.Unmarshal(respBody, &authDetails)
+	authDetails.InstituteCode = instituteCode
 	return authDetails, err
 }
