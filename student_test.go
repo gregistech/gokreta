@@ -7,12 +7,12 @@ import (
 
 func TestGetStudentDetails(t *testing.T) {
 	t.Run("low-level", TGetStudentDetails)
-	t.Run("high-level", TGetDetails)
+	t.Run("high-level", TUserGetStudentDetails)
 }
 
 func TestGetStudentDetailsByDate(t *testing.T) {
 	t.Run("low-level", TGetStudentDetailsByDate)
-	t.Run("high-level", TGetDetailsByDate)
+	t.Run("high-level", TUserGetStudentDetailsByDate)
 }
 
 func TGetStudentDetailsByDate(t *testing.T) {
@@ -55,7 +55,7 @@ func TGetStudentDetails(t *testing.T) {
 	printStudentResults(student)
 }
 
-func TGetDetails(t *testing.T) {
+func TUserGetStudentDetails(t *testing.T) {
 	instituteCode, userName, password, err := getCredetinalsFromFile()
 	user, err := NewUser(instituteCode, userName, password)
 	if err != nil {
@@ -63,7 +63,7 @@ func TGetDetails(t *testing.T) {
 		t.Errorf("An error happened while trying to get details (from User)!")
 		return
 	}
-	student, err := user.GetDetails()
+	student, err := user.GetStudentDetails()
 	if err != nil {
 		fmt.Println(err)
 		t.Errorf("An error happened while trying to get details (from User)!")
@@ -74,7 +74,7 @@ func TGetDetails(t *testing.T) {
 	printStudentResults(student)
 }
 
-func TGetDetailsByDate(t *testing.T) {
+func TUserGetStudentDetailsByDate(t *testing.T) {
 	instituteCode, userName, password, err := getCredetinalsFromFile()
 	user, err := NewUser(instituteCode, userName, password)
 	if err != nil {
@@ -82,7 +82,7 @@ func TGetDetailsByDate(t *testing.T) {
 		t.Errorf("An error happened while trying to get details (from User) by date!")
 		return
 	}
-	student, err := user.GetDetailsByDate("null", "null")
+	student, err := user.GetStudentDetailsByDate("null", "null")
 	if err != nil {
 		fmt.Println(err)
 		t.Errorf("An error happened while trying to get details (from User) by date!")
