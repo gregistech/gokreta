@@ -69,7 +69,7 @@ func TUserGetStudentDetails(t *testing.T) {
 		t.Errorf("An error happened while trying to get details (from User)!")
 		return
 	}
-	fmt.Println("TGetDetails passed!")
+	fmt.Println("TUserGetStudentDetails passed!")
 	fmt.Println("Result: ")
 	printStudentResults(student)
 }
@@ -88,7 +88,7 @@ func TUserGetStudentDetailsByDate(t *testing.T) {
 		t.Errorf("An error happened while trying to get details (from User) by date!")
 		return
 	}
-	fmt.Println("TGetDetailsByDate passed!")
+	fmt.Println("TUserGetStudentDetailsByDate passed!")
 	fmt.Println("Result: ")
 	printStudentResults(student)
 }
