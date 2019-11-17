@@ -24,3 +24,14 @@ func (user User) GetAllExams() ([]Exam, error) {
 func (user User) GetAllExamsByDate(fromDate, toDate string) ([]Exam, error) {
 	return GetAllExamsByDate(user.authDetails.InstituteCode, user.authDetails.AccessToken, fromDate, toDate)
 }
+
+func (user User) GetInstituteDetails() (Institute, error) {
+	institutes, err := GetAllInstitutes()
+	for i := range institutes {
+		e := institutes[i]
+		if e.InstituteCode == user.authDetails.InstituteCode {
+			return e, err
+		}
+	}
+	return Institute{}, err
+}
