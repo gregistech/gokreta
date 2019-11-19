@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 )
 
+// Exam struct contains every information about
+// an exam.
 type Exam struct {
 	Id          int    `json:"Id"`
 	Date        string `json:"Datum"`
@@ -15,6 +17,8 @@ type Exam struct {
 	PostDate    string `json:"BejelentesDatuma"`
 }
 
+// GetAllExams will request you all exams.
+// Returns an array of Exam(s).
 func GetAllExams(authDetails AuthDetails) ([]Exam, error) {
 	var exams []Exam
 	headers := map[string]string{
@@ -32,6 +36,8 @@ func GetAllExams(authDetails AuthDetails) ([]Exam, error) {
 	return exams, err
 }
 
+// GetAllExamsByDate will request you all exams by date.
+// Returns an array of Exam(s).
 func GetAllExamsByDate(authDetails AuthDetails, fromDate, toDate string) ([]Exam, error) {
 	var exams []Exam
 	headers := map[string]string{

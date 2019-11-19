@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 )
 
+// AuthDetails struct stores information that is
+// required to access the API.
 type AuthDetails struct {
 	InstituteCode string
 	AccessToken   string `json:"access_token"`
@@ -12,6 +14,8 @@ type AuthDetails struct {
 	RefreshToken  string `json:"refresh_token"`
 }
 
+// GetAuthDetailsByCredetinals will return you an
+// AuthDetails for further use.
 func GetAuthDetailsByCredetinals(instituteCode string,
 	userName string,
 	password string,
@@ -30,6 +34,8 @@ func GetAuthDetailsByCredetinals(instituteCode string,
 	return authDetails, err
 }
 
+// RefreshAuthDetails will request you a new AuthDetails
+// if your current one becomes obsolete.
 func RefreshAuthDetails(instituteCode string, refreshToken string) (AuthDetails, error) {
 	var authDetails AuthDetails
 	body := "institute_code=" + instituteCode + "&refresh_token=" + refreshToken + "&grant_type=refresh_token&client_id=" + CLIENT_ID

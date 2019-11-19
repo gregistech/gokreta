@@ -6,6 +6,8 @@ import (
 	"strings"
 )
 
+// MakeRequest will make a mostly premade request to the requested URL.
+// Returns an array if byte(s).
 func MakeRequest(requestType string, requestUrl string, headers map[string]string, body string) ([]byte, error) {
 	req, err := http.NewRequest(requestType, requestUrl, strings.NewReader(body))
 	if err != nil {
@@ -26,6 +28,8 @@ func MakeRequest(requestType string, requestUrl string, headers map[string]strin
 	return respBody, err
 }
 
+// VerboseMakeRequest accepts more customization to a request.
+// Returns an array of byte(s).
 func VerboseMakeRequest(requestType string,
 	requestUrl string,
 	headers http.Header,

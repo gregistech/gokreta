@@ -1,5 +1,6 @@
 package gokreta
 
+// Absence struct stores details about an absence.
 type Absence struct {
 	Id                     int    `json:"AbsenceId"`
 	Type                   string `json:"Type"`

@@ -1,11 +1,15 @@
 package gokreta
 
+// Nature struct will tell you about more about
+// an evaluation's nature.
 type Nature struct {
 	Id          int    `json:"Id"`
 	Name        string `json:"Nev"`
 	Description string `json:"Leiras"`
 }
 
+// Evaluation struct contains every information about
+// an evaluation.
 type Evaluation struct {
 	Id                int    `json:"EvaluationId"`
 	Form              string `json:"Form"`

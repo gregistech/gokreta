@@ -5,6 +5,7 @@ import (
 	"errors"
 )
 
+// CheckResponseErrors are checking for errors.
 func CheckResponseErrors(resp []byte) error {
 	jsonMap := make(map[string]string)
 	json.Unmarshal(resp, &jsonMap)

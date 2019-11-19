@@ -1,5 +1,6 @@
 package gokreta
 
+// Note struct contains every information about a note.
 type Note struct {
 	Id                int    `json:"NoteId"`
 	Type              string `json:"Type"`

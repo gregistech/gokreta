@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 )
 
+// Lesson struct contains every information about a lesson.
 type Lesson struct {
 	Id                       int    `json:"LessondId"`
 	Type                     string `json:"CalendarOraType"`
@@ -28,6 +29,7 @@ type Lesson struct {
 	//TODO: Homework                 Homework `json:"Homework"`
 }
 
+// GetTimetable will return an array of Lesson(s).
 func GetTimetable(authDetails AuthDetails) ([]Lesson, error) {
 	var lessons []Lesson
 	headers := map[string]string{
@@ -45,6 +47,7 @@ func GetTimetable(authDetails AuthDetails) ([]Lesson, error) {
 	return lessons, err
 }
 
+// GetTimetableByDate will return an array of Lesson(s) restricted by the given duration.
 func GetTimetableByDate(authDetails AuthDetails, fromDate, toDate string) ([]Lesson, error) {
 	var lessons []Lesson
 	headers := map[string]string{

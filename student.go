@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 )
 
+// SubjectAverage struct will contain every information about a subject average,
 type SubjectAverage struct {
 	Subject             string  `json:"Subject"`
 	SubjectCategory     string  `json:"SubjectCategory"`
@@ -13,6 +14,7 @@ type SubjectAverage struct {
 	Difference          float64 `json:"Difference"`
 }
 
+// Student struct will contain every information about a student,
 type Student struct {
 	Id              int              `json:"StudentId"`
 	SchoolYearId    int              `json:"StudentYearId"`
@@ -34,6 +36,7 @@ type Student struct {
 	Tutelaries      []Tutelary       `json:"Tutelaries"`
 }
 
+// GetStudentDetails will return a Student.
 func GetStudentDetails(authDetails AuthDetails) (Student, error) {
 	var student Student
 	headers := map[string]string{
@@ -51,6 +54,7 @@ func GetStudentDetails(authDetails AuthDetails) (Student, error) {
 	return student, err
 }
 
+// GetStudentDetails will return a Student restricted by the given durationn.
 func GetStudentDetailsByDate(authDetails AuthDetails, fromDate, toDate string) (Student, error) {
 	var student Student
 	headers := map[string]string{
