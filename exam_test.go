@@ -23,8 +23,7 @@ func TGetAllExams(t *testing.T) {
 		t.Errorf("An error happened while trying to get all the exams!")
 		return
 	}
-	accessToken := authDetails.AccessToken
-	exams, err := GetAllExams(instituteCode, accessToken)
+	exams, err := GetAllExams(authDetails)
 	if err != nil || exams == nil {
 		fmt.Println(err)
 		t.Errorf("An error happened while trying to get all the exams!")
@@ -44,8 +43,7 @@ func TGetAllExamsByDate(t *testing.T) {
 		t.Errorf("An error happened while trying to get all the exams by date!")
 		return
 	}
-	accessToken := authDetails.AccessToken
-	exams, err := GetAllExamsByDate(instituteCode, accessToken, "null", "null")
+	exams, err := GetAllExamsByDate(authDetails, "null", "null")
 	if err != nil || exams == nil {
 		fmt.Println(err)
 		t.Errorf("An error happened while trying to get all the exams by date!")

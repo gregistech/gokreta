@@ -15,13 +15,13 @@ type Exam struct {
 	PostDate    string `json:"BejelentesDatuma"`
 }
 
-func GetAllExams(instituteCode string, accessToken string) ([]Exam, error) {
+func GetAllExams(authDetails AuthDetails) ([]Exam, error) {
 	var exams []Exam
 	headers := map[string]string{
-		"Authorization": "Bearer " + accessToken,
+		"Authorization": "Bearer " + authDetails.AccessToken,
 	}
 	body, err := MakeRequest("GET",
-		"https://"+instituteCode+".e-kreta.hu/mapi/api/v1/BejelentettSzamonkeres",
+		"https://"+authDetails.InstituteCode+".e-kreta.hu/mapi/api/v1/BejelentettSzamonkeres",
 		headers,
 		"",
 	)
@@ -32,13 +32,13 @@ func GetAllExams(instituteCode string, accessToken string) ([]Exam, error) {
 	return exams, err
 }
 
-func GetAllExamsByDate(instituteCode string, accessToken string, fromDate string, toDate string) ([]Exam, error) {
+func GetAllExamsByDate(authDetails AuthDetails, fromDate, toDate string) ([]Exam, error) {
 	var exams []Exam
 	headers := map[string]string{
-		"Authorization": "Bearer " + accessToken,
+		"Authorization": "Bearer " + authDetails.AccessToken,
 	}
 	body, err := MakeRequest("GET",
-		"https://"+instituteCode+".e-kreta.hu/mapi/api/v1/BejelentettSzamonkeres?DatumTol="+fromDate+"&DatumIg="+toDate,
+		"https://"+authDetails.InstituteCode+".e-kreta.hu/mapi/api/v1/BejelentettSzamonkeres?DatumTol="+fromDate+"&DatumIg="+toDate,
 		headers,
 		"",
 	)

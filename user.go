@@ -18,11 +18,11 @@ func (user User) GetStudentDetailsByDate(fromDate, toDate string) (Student, erro
 }
 
 func (user User) GetAllExams() ([]Exam, error) {
-	return GetAllExams(user.authDetails.InstituteCode, user.authDetails.AccessToken)
+	return GetAllExams(user.authDetails)
 }
 
 func (user User) GetAllExamsByDate(fromDate, toDate string) ([]Exam, error) {
-	return GetAllExamsByDate(user.authDetails.InstituteCode, user.authDetails.AccessToken, fromDate, toDate)
+	return GetAllExamsByDate(user.authDetails, fromDate, toDate)
 }
 
 func (user User) GetInstituteDetails() (Institute, error) {
