@@ -15,26 +15,6 @@ func TestGetStudentDetailsByDate(t *testing.T) {
 	t.Run("high-level", TUserGetStudentDetailsByDate)
 }
 
-func TGetStudentDetailsByDate(t *testing.T) {
-	instituteCode, userName, password, err := getCredetinalsFromFile()
-	authDetails, err := GetAuthDetailsByCredetinals(instituteCode, userName, password)
-	if err != nil {
-		fmt.Println(err)
-		t.Errorf("An error happened while trying to get student details by date!")
-		return
-	}
-	accessToken := authDetails.AccessToken
-	student, err := GetStudentDetailsByDate(instituteCode, accessToken, "null", "null")
-	if err != nil {
-		fmt.Println(err)
-		t.Errorf("An error happened while trying to get student details by date!")
-		return
-	}
-	fmt.Println("TGetStudentDetailsByDate passed!")
-	fmt.Println("Result: ")
-	printStudentResults(student)
-}
-
 func TGetStudentDetails(t *testing.T) {
 	instituteCode, userName, password, err := getCredetinalsFromFile()
 	authDetails, err := GetAuthDetailsByCredetinals(instituteCode, userName, password)
@@ -43,14 +23,32 @@ func TGetStudentDetails(t *testing.T) {
 		t.Errorf("An error happened while trying to get student details!")
 		return
 	}
-	accessToken := authDetails.AccessToken
-	student, err := GetStudentDetails(instituteCode, accessToken)
+	student, err := GetStudentDetails(authDetails)
 	if err != nil {
 		fmt.Println(err)
 		t.Errorf("An error happened while trying to get student details!")
 		return
 	}
 	fmt.Println("TGetStudentDetails passed!")
+	fmt.Println("Result: ")
+	printStudentResults(student)
+}
+
+func TGetStudentDetailsByDate(t *testing.T) {
+	instituteCode, userName, password, err := getCredetinalsFromFile()
+	authDetails, err := GetAuthDetailsByCredetinals(instituteCode, userName, password)
+	if err != nil {
+		fmt.Println(err)
+		t.Errorf("An error happened while trying to get student details by date!")
+		return
+	}
+	student, err := GetStudentDetailsByDate(authDetails, "null", "null")
+	if err != nil {
+		fmt.Println(err)
+		t.Errorf("An error happened while trying to get student details by date!")
+		return
+	}
+	fmt.Println("TGetStudentDetailsByDate passed!")
 	fmt.Println("Result: ")
 	printStudentResults(student)
 }

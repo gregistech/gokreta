@@ -10,11 +10,11 @@ func NewUser(instituteCode, userName, password string) (User, error) {
 }
 
 func (user User) GetStudentDetails() (Student, error) {
-	return GetStudentDetails(user.authDetails.InstituteCode, user.authDetails.AccessToken)
+	return GetStudentDetails(user.authDetails)
 }
 
 func (user User) GetStudentDetailsByDate(fromDate, toDate string) (Student, error) {
-	return GetStudentDetailsByDate(user.authDetails.InstituteCode, user.authDetails.AccessToken, fromDate, toDate)
+	return GetStudentDetailsByDate(user.authDetails, fromDate, toDate)
 }
 
 func (user User) GetAllExams() ([]Exam, error) {

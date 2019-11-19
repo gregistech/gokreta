@@ -34,17 +34,13 @@ type Student struct {
 	Tutelaries      []Tutelary       `json:"Tutelaries"`
 }
 
-func GetStudentDetailsByDate(instituteCode string,
-	accessToken string,
-	fromDate string,
-	toDate string,
-) (Student, error) {
+func GetStudentDetails(authDetails AuthDetails) (Student, error) {
 	var student Student
 	headers := map[string]string{
-		"Authorization": "Bearer " + accessToken,
+		"Authorization": "Bearer " + authDetails.AccessToken,
 	}
 	body, err := MakeRequest("GET",
-		"https://"+instituteCode+".e-kreta.hu/mapi/api/v1/Student?fromDate="+fromDate+"&toDate="+toDate,
+		"https://"+authDetails.InstituteCode+".e-kreta.hu/mapi/api/v1/Student",
 		headers,
 		"",
 	)
@@ -55,13 +51,13 @@ func GetStudentDetailsByDate(instituteCode string,
 	return student, err
 }
 
-func GetStudentDetails(instituteCode string, accessToken string) (Student, error) {
+func GetStudentDetailsByDate(authDetails AuthDetails, fromDate, toDate string) (Student, error) {
 	var student Student
 	headers := map[string]string{
-		"Authorization": "Bearer " + accessToken,
+		"Authorization": "Bearer " + authDetails.AccessToken,
 	}
 	body, err := MakeRequest("GET",
-		"https://"+instituteCode+".e-kreta.hu/mapi/api/v1/Student",
+		"https://"+authDetails.InstituteCode+".e-kreta.hu/mapi/api/v1/Student?fromDate="+fromDate+"&toDate="+toDate,
 		headers,
 		"",
 	)
