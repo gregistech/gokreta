@@ -1,8 +1,8 @@
 # gokreta
 
 ## Languages/Nyelvek
-* [Magyar](https://github.com/thegergo02/blob/master/gokreta/README.hu_HU.md)
-* [English](https://github.com/thegergo02/blob/master/gokreta/README.md)
+* [Magyar](https://github.com/thegergo02/gokreta/blob/master/README.hu_HU.md)
+* [English](https://github.com/thegergo02/gokreta/blob/master/README.md)
 
 ## The package's goal
 A simple abstraction to the KRÉTA API.
