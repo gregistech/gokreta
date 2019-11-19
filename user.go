@@ -35,3 +35,11 @@ func (user User) GetInstituteDetails() (Institute, error) {
 	}
 	return Institute{}, err
 }
+
+func (user User) GetTimetable() ([]Lesson, error) {
+	return GetTimetable(user.authDetails.InstituteCode, user.authDetails.AccessToken)
+}
+
+func (user User) GetTimetableByDate(fromDate, toDate string) ([]Lesson, error) {
+	return GetTimetableByDate(user.authDetails.InstituteCode, user.authDetails.AccessToken, fromDate, toDate)
+}
