@@ -1,8 +1,8 @@
 # gokreta
 
 ## Nyelvek/Languages
-* [Magyar](https://github.com/thegergo02/blob/master/gokreta/README.hu_HU.md)
 * [English](https://github.com/thegergo02/blob/master/gokreta/README.md)
+* [Magyar](https://github.com/thegergo02/blob/master/gokreta/README.hu_HU.md)
 
 ## A csomag célja
 Egy egyszerű absztrakció létrehozása a Kréta API-hoz.
