@@ -23,8 +23,7 @@ func TGetTimetable(t *testing.T) {
 		t.Errorf("An error happened while trying to get the timetable!")
 		return
 	}
-	accessToken := authDetails.AccessToken
-	lessons, err := GetTimetable(instituteCode, accessToken)
+	lessons, err := GetTimetable(authDetails)
 	if err != nil {
 		fmt.Println(err)
 		t.Errorf("An error happened while trying to get the timetable!")
@@ -44,8 +43,7 @@ func TGetTimetableByDate(t *testing.T) {
 		t.Errorf("An error happened while trying to get the timetable by date!")
 		return
 	}
-	accessToken := authDetails.AccessToken
-	lessons, err := GetTimetableByDate(instituteCode, accessToken, "null", "null")
+	lessons, err := GetTimetableByDate(authDetails, "null", "null")
 	if err != nil {
 		fmt.Println(err)
 		t.Errorf("An error happened while trying to get the timetable by date!")

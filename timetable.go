@@ -28,13 +28,13 @@ type Lesson struct {
 	//TODO: Homework                 Homework `json:"Homework"`
 }
 
-func GetTimetableByDate(instituteCode string, accessToken string, fromDate string, toDate string) ([]Lesson, error) {
+func GetTimetable(authDetails AuthDetails) ([]Lesson, error) {
 	var lessons []Lesson
 	headers := map[string]string{
-		"Authorization": "Bearer " + accessToken,
+		"Authorization": "Bearer " + authDetails.AccessToken,
 	}
 	body, err := MakeRequest("GET",
-		"https://"+instituteCode+".e-kreta.hu/mapi/api/v1/Lesson?fromDate="+fromDate+"&toDate="+toDate,
+		"https://"+authDetails.InstituteCode+".e-kreta.hu/mapi/api/v1/Lesson",
 		headers,
 		"",
 	)
@@ -45,13 +45,13 @@ func GetTimetableByDate(instituteCode string, accessToken string, fromDate strin
 	return lessons, err
 }
 
-func GetTimetable(instituteCode string, accessToken string) ([]Lesson, error) {
+func GetTimetableByDate(authDetails AuthDetails, fromDate, toDate string) ([]Lesson, error) {
 	var lessons []Lesson
 	headers := map[string]string{
-		"Authorization": "Bearer " + accessToken,
+		"Authorization": "Bearer " + authDetails.AccessToken,
 	}
 	body, err := MakeRequest("GET",
-		"https://"+instituteCode+".e-kreta.hu/mapi/api/v1/Lesson",
+		"https://"+authDetails.InstituteCode+".e-kreta.hu/mapi/api/v1/Lesson?fromDate="+fromDate+"&toDate="+toDate,
 		headers,
 		"",
 	)

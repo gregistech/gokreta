@@ -37,9 +37,9 @@ func (user User) GetInstituteDetails() (Institute, error) {
 }
 
 func (user User) GetTimetable() ([]Lesson, error) {
-	return GetTimetable(user.authDetails.InstituteCode, user.authDetails.AccessToken)
+	return GetTimetable(user.authDetails)
 }
 
 func (user User) GetTimetableByDate(fromDate, toDate string) ([]Lesson, error) {
-	return GetTimetableByDate(user.authDetails.InstituteCode, user.authDetails.AccessToken, fromDate, toDate)
+	return GetTimetableByDate(user.authDetails, fromDate, toDate)
 }
